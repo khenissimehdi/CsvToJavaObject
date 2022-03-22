@@ -23,4 +23,9 @@ public class Fragments {
        // return fragmentList.stream().flatMap(Stream).collect()
       return fragmentList.stream().map(Fragment::fragmentList).flatMap(List::stream).distinct().count();
     }
+
+    public static Map<String, Long>  numberOfFragmentBySomething(List<Fragment> fragmentList) {
+        return fragmentList.stream().map(Fragment::fragmentList).flatMap(List::stream)
+                .collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+    }
 }
