@@ -3,10 +3,7 @@ package main.java.core;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Fragments {
@@ -27,5 +24,11 @@ public class Fragments {
     public static Map<String, Long>  numberOfFragmentBySomething(List<Fragment> fragmentList) {
         return fragmentList.stream().map(Fragment::fragmentList).flatMap(List::stream)
                 .collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+    }
+
+    public static Optional<FragmentSomethingCount> someInMostFragments( Map<String, Long> map) {
+        
+        return map.entrySet().stream().
+                map(e -> new FragmentSomethingCount(e.getKey(), e.getValue())).collect(Collectors.maxBy(Comparator.comparing(e->e.numberOf())));
     }
 }
