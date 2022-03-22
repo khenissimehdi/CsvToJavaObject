@@ -18,4 +18,9 @@ public class Fragments {
     public static Map<String, Fragment> fromListToMap(List<Fragment> fragmentList) {
         return fragmentList.stream().collect(Collectors.toUnmodifiableMap(Fragment::title, e->e));
     }
+
+    public static Long numberOfUniqueFragments(List<Fragment> fragmentList) {
+       // return fragmentList.stream().flatMap(Stream).collect()
+      return fragmentList.stream().map(Fragment::fragmentList).flatMap(List::stream).distinct().count();
+    }
 }
